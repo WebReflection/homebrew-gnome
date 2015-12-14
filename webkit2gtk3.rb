@@ -37,6 +37,7 @@ class Webkit2gtk3 < Formula
       -DENABLE_OPENGL=OFF
       -DUSE_LIBNOTIFY=OFF
       -DUSE_LIBHYPHEN=OFF
+      -DCMAKE_SHARED_LINKER_FLAGS=-L/path/to/nonexistent/folder
     ]
 
     system "cmake", ".", *(std_cmake_args + extra_args)
