@@ -1,5 +1,5 @@
-class Webkit2gtk3 < Formula
-  desc "Full-featured Gtk+3 port of the WebKit2 rendering engine"
+class Webkitgtk < Formula
+  desc "Full-featured Gtk+ port of the WebKit rendering engine"
   homepage "http://webkitgtk.org"
   url "http://webkitgtk.org/releases/webkitgtk-2.10.4.tar.xz"
   sha256 "dbf8260da5cac0c74de2d3cce1fe7c519da3cd816a2c769cb6c6d56addd2f055"
