@@ -1,13 +1,13 @@
-class Webkitgtku < Formula
+class Webkitgtk < Formula
   desc "Full-featured Gtk+ port of the WebKit rendering engine"
   homepage "http://webkitgtk.org"
   url "http://webkitgtk.org/releases/webkitgtk-2.12.0.tar.xz"
   sha256 "a68604f8fd1bcb247d647709290226289b90c16acb1f3730538b688db8df5ea6"
 
   bottle do
-    sha256 "7fb9c9698b13d9c803b4f6250aa8385ca4f635e91ad8803d084adc28f2f6e240" => :el_capitan
-    sha256 "4dc1ee0d27af05b8697f1a4dfd10d6f7cb40c202a4bac604fff2470b268aac74" => :yosemite
-    sha256 "bab243e94c3e8a247082f8ba2125567c1f8a34fa634710b68fda541f3fb75152" => :mavericks
+    sha256 "34d4b523b20515fbbebcfc8371a184e58c6b311e0124880b166798f7213a713b" => :el_capitan
+    sha256 "00b0f90483ad3a7228ad5e77f3870d57ae7d0b63745fa6ec067445b35ffac366" => :yosemite
+    sha256 "bf7e176115d88de8ce5e37091d16b713d42260e97aced476f1d90331165c61ce" => :mavericks
   end
 
   depends_on "cmake" => :build
@@ -17,10 +17,6 @@ class Webkitgtku < Formula
   depends_on "webp"
 
   needs :cxx11
-
-  # modified version of the patch in https://bugs.webkit.org/show_bug.cgi?id=151293
-  # should be included in next version
-  patch :DATA
 
   def install
     extra_args = %W[
@@ -122,3 +118,16 @@ class Webkitgtku < Formula
 end
 
 __END__
+diff --git a/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp b/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp
+index 7594cac..7e39ac0 100644
+--- a/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp
++++ b/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp
+@@ -43,7 +43,7 @@
+ #include <gio/gio.h>
+ #endif
+
+-#if defined(SOCK_SEQPACKET)
++#if defined(SOCK_SEQPACKET) && !OS(DARWIN)
+ #define SOCKET_TYPE SOCK_SEQPACKET
+ #else
+ #if PLATFORM(GTK)
