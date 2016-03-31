@@ -116,18 +116,3 @@ class Webkitgtk < Formula
     assert_match version.to_s, shell_output("./test")
   end
 end
-
-__END__
-diff --git a/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp b/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp
-index 7594cac..7e39ac0 100644
---- a/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp
-+++ b/Source/WebKit2/Platform/IPC/unix/ConnectionUnix.cpp
-@@ -43,7 +43,7 @@
- #include <gio/gio.h>
- #endif
-
--#if defined(SOCK_SEQPACKET)
-+#if defined(SOCK_SEQPACKET) && !OS(DARWIN)
- #define SOCKET_TYPE SOCK_SEQPACKET
- #else
- #if PLATFORM(GTK)
